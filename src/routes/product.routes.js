@@ -8,6 +8,8 @@ import {
   deleteProduct,
 } from "../controllers/product.controller.js";
 
+import upload from "../middlewares/upload.middleware.js";
+
 const router = express.Router();
 
 
@@ -20,12 +22,19 @@ router.get("/:id", getProductById);
 
 
 // CREATE PRODUCT
-router.post("/", createProduct);
+// upload.array("images", 5)
+// "images" => field name
+// 5 => maximum files
+router.post(
+  "/",
+  upload.array("images", 5),
+  createProduct
+);
 
 
 // UPDATE PRODUCT
 router.put("/:id", updateProduct);
- 
+
 
 // DELETE PRODUCT
 router.delete("/:id", deleteProduct);

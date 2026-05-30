@@ -9,7 +9,11 @@ app.use(cors());
 app.use(express.json());
 
 
-// base api route
+// serving uploads folder publicly
+app.use("/uploads", express.static("uploads"));
+
+
+// api routes
 app.use("/api/products", productRoutes);
 
 
