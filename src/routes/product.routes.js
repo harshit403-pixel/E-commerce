@@ -9,6 +9,7 @@ import {
 } from "../controllers/product.controller.js";
 
 import upload from "../middlewares/upload.middleware.js";
+import authMiddleware from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
@@ -22,21 +23,27 @@ router.get("/:id", getProductById);
 
 
 // CREATE PRODUCT
-// upload.array("images", 5)
-// "images" => field name
-// 5 => maximum files
 router.post(
   "/",
+  authMiddleware,
   upload.array("images", 5),
   createProduct
 );
 
 
 // UPDATE PRODUCT
-router.put("/:id", updateProduct);
+router.put(
+  "/:id",
+  authMiddleware,
+  updateProduct
+);
 
 
 // DELETE PRODUCT
-router.delete("/:id", deleteProduct);
+router.delete(
+  "/:id",
+  authMiddleware,
+  deleteProduct
+);
 
 export default router;
