@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 
 import productRoutes from "./routes/product.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 import errorMiddleware from "./middlewares/error.middleware.js";
 
 const app = express();
@@ -10,12 +11,13 @@ app.use(cors());
 app.use(express.json());
 
 
-// serving uploads folder
+// static uploads folder
 app.use("/uploads", express.static("uploads"));
 
 
 // routes
 app.use("/api/products", productRoutes);
+app.use("/api/auth", authRoutes);
 
 
 // home route
@@ -27,7 +29,7 @@ app.get("/", (req, res) => {
 });
 
 
-// error middleware should always be at bottom
+// global error middleware
 app.use(errorMiddleware);
 
 export default app;
