@@ -46,4 +46,11 @@ router.delete(
   deleteProduct
 );
 
+//UPDATE PRODUCT
+router.put(
+  "/:id",
+  authMiddleware,
+  upload.array("images", 5),
+  updateProduct
+);
 export default router;
